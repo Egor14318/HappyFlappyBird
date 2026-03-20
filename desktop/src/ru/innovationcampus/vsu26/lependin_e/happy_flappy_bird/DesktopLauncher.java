@@ -8,8 +8,10 @@ import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setForegroundFPS(60);
+		config.setForegroundFPS(75);
+		config.setWindowedMode(MyGdxGame.SCR_WIDTH, MyGdxGame.SCR_HEIGHT);
 		config.setTitle("Happy Flappy  bird");
 		new Lwjgl3Application(new MyGdxGame(), config);
+
 	}
 }
