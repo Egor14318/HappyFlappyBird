@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 public class Bird {
-    int x, y;
+    int x=100, y;
     int speed;
     int width;
     int height;
@@ -43,8 +43,6 @@ public class Bird {
     }
 
     public void fly() {
-        x = 100;
-        y += speed;
         if (y >= jumpHeight) {
             jump = false;
 

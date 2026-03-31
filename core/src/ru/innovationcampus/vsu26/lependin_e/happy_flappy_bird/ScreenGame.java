@@ -31,6 +31,7 @@ public class ScreenGame implements Screen {
     public void render(float delta) {
         if (Gdx.input.justTouched()) {
             System.out.println("Just touched");
+            bird.onClick();
         }
         bird.fly();
         if (!bird.isInField()) {
