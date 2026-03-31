@@ -8,8 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyGdxGame extends Game  {
-	public static final int SCR_WIDTH = 800; //1280
-	public static final int SCR_HEIGHT = 600; //720
+	public static final int SCR_WIDTH = 1280;
+	public static final int SCR_HEIGHT = 720;
 	public OrthographicCamera camera;
 	SpriteBatch batch;
 
