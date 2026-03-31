@@ -1,5 +1,7 @@
 package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird;
 
+import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_HEIGHT;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -28,7 +30,12 @@ public class Bird {
 
     }
 
+    public boolean isInField() {
+        if (y + height < 0) return false;
+        if (y > SCR_HEIGHT) return false;
+        return  true;
 
+    }
 
     void onClick() {
         jump = true;
@@ -36,7 +43,7 @@ public class Bird {
     }
 
     public void fly() {
-        x += speed;
+        x = 100;
         y += speed;
         if (y >= jumpHeight) {
             jump = false;
