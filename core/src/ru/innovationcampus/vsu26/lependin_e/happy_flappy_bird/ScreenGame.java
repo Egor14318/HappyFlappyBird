@@ -33,7 +33,10 @@ public class ScreenGame implements Screen {
             System.out.println("Just touched");
         }
         bird.fly();
-
+        if (!bird.isInField()) {
+            System.out.println("not in field");
+            isGameOver = true;
+        }
 
         ScreenUtils.clear(1, 0, 0, 1);
         myGdxGame.camera.update();
