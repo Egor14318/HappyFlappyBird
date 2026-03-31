@@ -57,7 +57,7 @@ public class Bird {
     }
 
     public void draw(Batch batch) {
-            int frameMultiplier = 10;
+            int frameMultiplier = 5;
             batch.draw(framesArray[frameCounter / frameMultiplier], x, y, width, height);   //длинна и ширина фиксированные
             if (frameCounter++ == framesArray.length * frameMultiplier - 1) frameCounter = 0;
 
