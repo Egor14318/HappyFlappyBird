@@ -28,6 +28,7 @@ public class Bird {
         this.width = width;
         this.height = height;
 
+
     }
 
     public boolean isInField() {

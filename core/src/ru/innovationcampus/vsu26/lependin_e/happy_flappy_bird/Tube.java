@@ -13,11 +13,12 @@ public class Tube {
     int width = 200;
     int height = 700;
     int gapHeight = 400;
-    int padding;
+    int padding = 100;
     int gapY;
     int x;
     int distanceBetweenTubes;
-    int speed = 5;
+    int speed = 10;
+    boolean isPointReceived;
     Random random = new Random();
     Texture textureUpperTube;
     Texture textureDownTube;
@@ -26,23 +27,27 @@ public class Tube {
         random = new Random();
 
         gapY = gapHeight / 2 + padding + random.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 2));
-        distanceBetweenTubes = (SCR_WIDTH + width) / (tubeCount - 1 );
+        distanceBetweenTubes = (SCR_WIDTH + width) / (tubeCount - 1);
         x = distanceBetweenTubes * tubeIdx + SCR_WIDTH;
 
         textureUpperTube = new Texture("tubes/tube_flipped.png");
         textureDownTube = new Texture("tubes/tube.png");
     }
+
     void draw(Batch batch) {
         batch.draw(textureUpperTube, x, gapY + gapHeight / 2, width, height);
         batch.draw(textureDownTube, x, gapY - gapHeight / 2 - height, width, height);
     }
+
     void move() {
         x -= speed;
         if (x < -width) {
+            isPointReceived = false;
             x = SCR_WIDTH + distanceBetweenTubes;
             gapY = gapHeight / 2 + padding + random.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 2));
         }
     }
+
     public boolean isHit(Bird bird) {
 
         // down tube collision
@@ -55,6 +60,22 @@ public class Tube {
 
         return false;
     }
+
+
+    public void setPointReceived() {
+        isPointReceived = true;
+
+    }
+
+    public boolean needAddPoint(Bird bird) {
+        if (bird.x > x + width && !isPointReceived) {
+            return true;
+        }
+
+        return false;
+
+    }
+
     /*
     public boolean isHit(Bird bird) {
         if (bird.x + bird.width == x && bird.x == x + width) {
@@ -67,8 +88,6 @@ public class Tube {
         textureDownTube.dispose();
         textureUpperTube.dispose();
     }
-
-
 
 
 }
