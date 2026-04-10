@@ -1,4 +1,4 @@
-package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird;
+package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters;
 
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_HEIGHT;
 
@@ -38,7 +38,7 @@ public class Bird {
 
     }
 
-    void onClick() {
+    public void onClick() {
         jump = true;
         jumpHeight = maxHeightOfJump + y;
     }

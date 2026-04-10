@@ -1,13 +1,21 @@
-package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird;
+package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Bird;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.MovingBackground;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.PointCounter;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Tube;
+
 public class ScreenGame implements Screen {
 
     Bird bird;
     PointCounter pointCounter;
+    MovingBackground background;
+
     int gamePoints;
     boolean isGameOver;
     MyGdxGame myGdxGame;
@@ -18,10 +26,11 @@ public class ScreenGame implements Screen {
 
 
 
-    ScreenGame(MyGdxGame myGdxGame) {
+    public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        bird = new Bird(20, MyGdxGame.SCR_HEIGHT, 5, 240, 160);
+        bird = new Bird(20, MyGdxGame.SCR_HEIGHT, 7, 240, 160);
         pointCounter = new PointCounter(MyGdxGame.SCR_WIDTH - pointCounterMarginRight, MyGdxGame.SCR_HEIGHT - pointCounterMarginTop);
+        background = new MovingBackground();
         initTubes();
     }
 
@@ -39,6 +48,7 @@ public class ScreenGame implements Screen {
             System.out.println("Just touched");
             bird.onClick();
         }
+        background.move();
         bird.fly();
         if (!bird.isInField()) {
             System.out.println("not in field");
@@ -59,6 +69,8 @@ public class ScreenGame implements Screen {
             }
         }
         myGdxGame.batch.begin();
+
+        background.draw(myGdxGame.batch);
         bird.draw(myGdxGame.batch);
         pointCounter.draw(myGdxGame.batch, gamePoints);
         for (Tube tube : tubes) tube.draw(myGdxGame.batch);
@@ -98,6 +110,7 @@ public class ScreenGame implements Screen {
     @Override
     public void dispose() {
         bird.dispose();
+        background.dispose();
     }
 
 }

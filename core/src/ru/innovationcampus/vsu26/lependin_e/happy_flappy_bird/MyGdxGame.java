@@ -1,17 +1,16 @@
 package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.screens.ScreenGame;
 
 public class MyGdxGame extends Game  {
 	public static final int SCR_WIDTH = 1280;
 	public static final int SCR_HEIGHT = 720;
 	public OrthographicCamera camera;
-	SpriteBatch batch;
+	public SpriteBatch batch;
 
 
 	ScreenGame screenGame;

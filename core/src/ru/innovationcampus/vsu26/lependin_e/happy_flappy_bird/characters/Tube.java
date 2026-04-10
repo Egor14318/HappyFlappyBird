@@ -1,4 +1,4 @@
-package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird;
+package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters;
 
 
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_HEIGHT;
@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.util.Random;
+
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Bird;
 
 public class Tube {
     int width = 200;
@@ -34,12 +36,12 @@ public class Tube {
         textureDownTube = new Texture("tubes/tube.png");
     }
 
-    void draw(Batch batch) {
+    public void draw(Batch batch) {
         batch.draw(textureUpperTube, x, gapY + gapHeight / 2, width, height);
         batch.draw(textureDownTube, x, gapY - gapHeight / 2 - height, width, height);
     }
 
-    void move() {
+    public void move() {
         x -= speed;
         if (x < -width) {
             isPointReceived = false;
