@@ -12,6 +12,8 @@ import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Tube;
 
 public class ScreenGame implements Screen {
 
+    ScreenRestart screenRestart;
+
     Bird bird;
     PointCounter pointCounter;
     MovingBackground background;
@@ -30,7 +32,7 @@ public class ScreenGame implements Screen {
         this.myGdxGame = myGdxGame;
         bird = new Bird(20, MyGdxGame.SCR_HEIGHT, 7, 240, 160);
         pointCounter = new PointCounter(MyGdxGame.SCR_WIDTH - pointCounterMarginRight, MyGdxGame.SCR_HEIGHT - pointCounterMarginTop);
-        background = new MovingBackground();
+        background = new MovingBackground("backgrounds/game_bg.png");
         initTubes();
     }
 
@@ -48,6 +50,7 @@ public class ScreenGame implements Screen {
             System.out.println("Just touched");
             bird.onClick();
         }
+
         background.move();
         bird.fly();
         if (!bird.isInField()) {
@@ -68,8 +71,11 @@ public class ScreenGame implements Screen {
                 System.out.println(gamePoints);
             }
         }
+        if (isGameOver) {
+            myGdxGame.setScreen(myGdxGame.screenRestart);
+        }
+        if (isGameOver) { myGdxGame.screenRestart.gamePoints = gamePoints; myGdxGame.setScreen(myGdxGame.screenRestart); }
         myGdxGame.batch.begin();
-
         background.draw(myGdxGame.batch);
         bird.draw(myGdxGame.batch);
         pointCounter.draw(myGdxGame.batch, gamePoints);
