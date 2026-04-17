@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.ScreenUtils;
 
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame;
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.MovingBackground;
@@ -48,6 +49,10 @@ public class ScreenMenu implements Screen {
             }
         }
 
+        ScreenUtils.clear(1, 0, 0, 1);
+
+        myGdxGame.camera.update();
+        myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
 
         myGdxGame.batch.begin();
         background.draw(myGdxGame.batch);
