@@ -1,10 +1,13 @@
 package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Tube;
 
 
 public class TextButton {
@@ -16,6 +19,9 @@ public class TextButton {
     int textX, textY;
     int buttonWidth, buttonHeight;
     int textWidth, textHeight;
+
+
+
 
 
 
@@ -44,6 +50,13 @@ public class TextButton {
 
 
     }
+    public boolean isHit(int tx, int ty) {
+        return tx >= x && tx <= x + buttonWidth && ty >= y && ty <= y + buttonHeight;
+    }
+
+
+
+
     public void draw(Batch batch) {
         batch.draw(texture, x, y, buttonWidth, buttonHeight);
         font.draw(batch, text, textX, textY);

@@ -57,6 +57,9 @@ public class Bird {
 
     }
 
+    public void setY(int y2){
+        this.y = y2;
+    }
     public void draw(Batch batch) {
             int frameMultiplier = 5;
             batch.draw(framesArray[frameCounter / frameMultiplier], x, y, width, height);   //длинна и ширина фиксированные

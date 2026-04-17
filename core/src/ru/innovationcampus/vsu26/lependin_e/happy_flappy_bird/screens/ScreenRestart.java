@@ -14,6 +14,7 @@ public class ScreenRestart implements Screen {
 
 
     TextButton buttonRestart;
+    TextButton buttonMenu;
     MovingBackground background;
     MyGdxGame myGdxGame;
     PointCounter pointCounter;
@@ -23,8 +24,8 @@ public class ScreenRestart implements Screen {
         this.myGdxGame  = myGdxGame;
         buttonRestart = new TextButton(100,400,"Restart");
         background = new MovingBackground("backgrounds/restart_bg.png");
-        pointCounter = new PointCounter(750,530);
-
+        pointCounter = new PointCounter(700,400);
+        buttonMenu = new TextButton(100,200, "Main Menu");
 
     }
 
@@ -38,7 +39,12 @@ public class ScreenRestart implements Screen {
     public void render(float delta){
             if (Gdx.input.justTouched()){
                 Vector3 touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-
+                if (buttonRestart.isHit((int)touch.x, (int) touch.y)){
+                    myGdxGame.setScreen(myGdxGame.screenGame);
+                }
+                if (buttonMenu.isHit((int) touch.x,(int) touch.y)){
+                    myGdxGame.setScreen(myGdxGame.screenMenu);
+                }
             }
 
             ScreenUtils.clear(1, 0, 0, 1);
@@ -52,6 +58,7 @@ public class ScreenRestart implements Screen {
             background.draw(myGdxGame.batch);
             buttonRestart.draw(myGdxGame.batch);
             pointCounter.draw(myGdxGame.batch, gamePoints);
+            buttonMenu.draw(myGdxGame.batch);
             myGdxGame.batch.end();
 
 
@@ -61,6 +68,7 @@ public class ScreenRestart implements Screen {
     public void resize(int width, int height) {
 
     }
+
 
     @Override
     public void pause() {
@@ -79,7 +87,8 @@ public class ScreenRestart implements Screen {
 
     @Override
     public void dispose() {
-
+        buttonRestart.dispose();
+        background.dispose();
     }
 }
 
