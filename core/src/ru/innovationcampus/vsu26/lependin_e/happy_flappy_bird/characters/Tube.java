@@ -3,6 +3,7 @@ package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters;
 
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_HEIGHT;
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_WIDTH;
+import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.screens.ScreenMenu.difficult;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -11,19 +12,52 @@ import java.util.Random;
 
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Bird;
 
+
 public class Tube {
-    int width = 200;
-    int height = 700;
+    static int  width = 200;
+    static int height = 700;
     int gapHeight = 400;
     int padding = 100;
     int gapY;
     int x;
     int distanceBetweenTubes;
-    int speed = 10;
+    static int speed = 10;
     boolean isPointReceived;
     Random random = new Random();
     Texture textureUpperTube;
     Texture textureDownTube;
+
+
+    public static void dif(){
+        if (difficult ==1) {
+                System.out.println("1");
+        }
+
+        if (difficult ==2 ) {
+            speed = 12;
+            width = 220;
+            height = 750;
+
+            System.out.println("2");
+        }
+         if (difficult==3) {
+             speed = 12;
+             width = 230;
+             height = 770;
+
+             System.out.println("3");
+         }
+         if (difficult==4) {
+             difficult = 1;
+             System.out.println("4");
+         }
+
+
+
+
+
+    }
+
 
     public Tube(int tubeCount, int tubeIdx) {
         random = new Random();

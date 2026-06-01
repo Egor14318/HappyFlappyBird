@@ -4,11 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Bird;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Tube;
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.MovingBackground;
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame;
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.PointCounter;
-import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Tube;
+import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.screens.ScreenMenu;
 
 public class ScreenGame implements Screen {
 
@@ -26,14 +28,54 @@ public class ScreenGame implements Screen {
     final int pointCounterMarginTop = 60;
     final int pointCounterMarginRight = 400;
 
+    public static int speed=7;
+    public static int bwidth=240;
+    public static int bheight=160;
+
+
+
+
 
 
     public ScreenGame(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-        bird = new Bird(20, MyGdxGame.SCR_HEIGHT/2, 7, 240, 160);
+        bird = new Bird(20, MyGdxGame.SCR_HEIGHT/2, speed, bwidth, bheight);
         pointCounter = new PointCounter(MyGdxGame.SCR_WIDTH - pointCounterMarginRight, MyGdxGame.SCR_HEIGHT - pointCounterMarginTop);
         background = new MovingBackground("backgrounds/game_bg.png");
         initTubes();
+        Tube.dif();
+        if (ScreenMenu.difficult==1){
+             speed=2;
+             bwidth=240;
+             bheight=160;
+            ScreenMenu.difficult=1;
+            System.out.println("1");
+
+        }
+        if (ScreenMenu.difficult==2){
+            speed=10;
+            bheight=180;
+            bwidth=260;
+
+            System.out.println("2");
+
+        }
+        if (ScreenMenu.difficult==3){
+            speed=12;
+            bheight=190;
+            bwidth=270;
+
+            System.out.println("3");
+
+        }
+        if (ScreenMenu.difficult==4){
+            speed=12;
+            bheight=190;
+            bwidth=270;
+
+            System.out.println("4");
+
+        }
     }
 
 
@@ -53,6 +95,7 @@ public class ScreenGame implements Screen {
             System.out.println("Just touched");
             bird.onClick();
         }
+
 
         background.move();
         bird.fly();

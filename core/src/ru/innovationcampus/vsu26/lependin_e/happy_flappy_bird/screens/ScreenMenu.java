@@ -19,18 +19,24 @@ public class ScreenMenu implements Screen {
     TextButton buttonExit;
     TextButton buttonStart;
     MovingBackground background;
+    TextButton buttondif;
+    TextButton buttoncount;
 
+    public static int  difficult = 1;
 
 
     public ScreenMenu(MyGdxGame myGdxGame) {
-        this.myGdxGame  = myGdxGame;
+        this.myGdxGame = myGdxGame;
 
         background = new MovingBackground("backgrounds/restart_bg.png");
-        buttonExit = new TextButton(50,400,"Exit");
-        buttonStart = new TextButton(600,400,"Start");
+        buttonExit = new TextButton(50, 400, "Exit");
+        buttonStart = new TextButton(600, 400, "Start");
+        buttondif = new TextButton(200, 200, "difficulty");
+        buttoncount = new TextButton(800, 200, new String(String.valueOf(difficult)));
 
 
     }
+
     @Override
     public void show() {
 
@@ -38,14 +44,20 @@ public class ScreenMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.justTouched())
-        {
+        if (Gdx.input.justTouched()) {
             Vector3 touch = myGdxGame.camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
             if (buttonStart.isHit((int) touch.x, (int) touch.y)) {
                 myGdxGame.setScreen(myGdxGame.screenGame);
             }
             if (buttonExit.isHit((int) touch.x, (int) touch.y)) {
                 Gdx.app.exit();
+            }
+            if (buttondif.isHit((int) touch.x, (int) touch.y)) {
+                difficult +=1;
+                System.out.println(difficult);
+                if (difficult==4){
+                    difficult=0;
+                }
             }
         }
 
@@ -58,6 +70,8 @@ public class ScreenMenu implements Screen {
         background.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
         buttonStart.draw(myGdxGame.batch);
+        buttondif.draw(myGdxGame.batch);
+        buttoncount.draw(myGdxGame.batch);
         myGdxGame.batch.end();
 
     }
@@ -87,6 +101,7 @@ public class ScreenMenu implements Screen {
         buttonStart.dispose();
         buttonExit.dispose();
         background.dispose();
+
 
     }
 }
