@@ -12,8 +12,8 @@ import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.MovingB
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.PointCounter;
 import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.components.TextButton;
 
-
 public class ScreenMenu implements Screen {
+
     MyGdxGame myGdxGame;
     Batch batch;
     TextButton buttonExit;
@@ -22,24 +22,30 @@ public class ScreenMenu implements Screen {
     TextButton buttondif;
     TextButton buttoncount;
 
-    public static int  difficult = 1;
-
+    public static int difficult = 1;
 
     public ScreenMenu(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
-
         background = new MovingBackground("backgrounds/restart_bg.png");
         buttonExit = new TextButton(50, 400, "Exit");
         buttonStart = new TextButton(600, 400, "Start");
         buttondif = new TextButton(200, 200, "difficulty");
-        buttoncount = new TextButton(800, 200, new String(String.valueOf(difficult)));
+        buttoncount = new TextButton(800, 200, getDifficultyName());
+    }
 
-
+    private String getDifficultyName() {
+        switch (difficult) {
+            case 1: return "Easy";
+            case 2: return "Medium";
+            case 3: return "Hard";
+            default: return "Easy";
+        }
     }
 
     @Override
     public void show() {
 
+        buttoncount = new TextButton(800, 200, getDifficultyName());
     }
 
     @Override
@@ -53,19 +59,19 @@ public class ScreenMenu implements Screen {
                 Gdx.app.exit();
             }
             if (buttondif.isHit((int) touch.x, (int) touch.y)) {
-                difficult +=1;
-                System.out.println(difficult);
-                if (difficult==4){
-                    difficult=0;
+                difficult++;
+                if (difficult > 3) {
+                    difficult = 1;
                 }
+
+                buttoncount = new TextButton(800, 200, getDifficultyName());
+                System.out.println("Difficulty changed to: " + difficult);
             }
         }
 
         ScreenUtils.clear(1, 0, 0, 1);
-
         myGdxGame.camera.update();
         myGdxGame.batch.setProjectionMatrix(myGdxGame.camera.combined);
-
         myGdxGame.batch.begin();
         background.draw(myGdxGame.batch);
         buttonExit.draw(myGdxGame.batch);
@@ -73,37 +79,24 @@ public class ScreenMenu implements Screen {
         buttondif.draw(myGdxGame.batch);
         buttoncount.draw(myGdxGame.batch);
         myGdxGame.batch.end();
-
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
+    public void resize(int width, int height) {}
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() {}
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() {}
 
     @Override
-    public void hide() {
-
-    }
+    public void hide() {}
 
     @Override
     public void dispose() {
         buttonStart.dispose();
         buttonExit.dispose();
         background.dispose();
-
-
     }
 }
-
-

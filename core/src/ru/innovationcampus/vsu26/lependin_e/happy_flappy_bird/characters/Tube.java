@@ -1,71 +1,33 @@
 package ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters;
 
-
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_HEIGHT;
 import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.MyGdxGame.SCR_WIDTH;
-import static ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.screens.ScreenMenu.difficult;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
-
 import java.util.Random;
 
-import ru.innovationcampus.vsu26.lependin_e.happy_flappy_bird.characters.Bird;
-
-
 public class Tube {
-    static int  width = 200;
-    static int height = 700;
-    int gapHeight = 400;
+
+    public static int width = 200;
+    public static int height = 700;
+    public static int speed = 10;
+    public static int gapHeight = 400; // высота промежутка между трубами
+
     int padding = 100;
     int gapY;
     int x;
     int distanceBetweenTubes;
-    static int speed = 10;
     boolean isPointReceived;
     Random random = new Random();
     Texture textureUpperTube;
     Texture textureDownTube;
 
-
-    public static void dif(){
-        if (difficult ==1) {
-                System.out.println("1");
-        }
-
-        if (difficult ==2 ) {
-            speed = 12;
-            width = 220;
-            height = 750;
-
-            System.out.println("2");
-        }
-         if (difficult==3) {
-             speed = 12;
-             width = 230;
-             height = 770;
-
-             System.out.println("3");
-         }
-         if (difficult==4) {
-             difficult = 1;
-             System.out.println("4");
-         }
-
-
-
-
-
-    }
-
-
     public Tube(int tubeCount, int tubeIdx) {
         random = new Random();
-
         gapY = gapHeight / 2 + padding + random.nextInt(SCR_HEIGHT - 2 * (padding + gapHeight / 2));
         distanceBetweenTubes = (SCR_WIDTH + width) / (tubeCount - 1);
         x = distanceBetweenTubes * tubeIdx + SCR_WIDTH;
-
         textureUpperTube = new Texture("tubes/tube_flipped.png");
         textureDownTube = new Texture("tubes/tube.png");
     }
@@ -86,44 +48,31 @@ public class Tube {
 
     public boolean isHit(Bird bird) {
 
-        // down tube collision
-        if (bird.y <= gapY - gapHeight / 2 && bird.x + bird.width >= x && bird.x <= x)
+        if (bird.y + bird.height >= gapY + gapHeight / 2 &&
+                bird.x + bird.width >= x && bird.x <= x + width) {
             return true;
-        if (bird.y + bird.height >= gapY + gapHeight / 2 && bird.x + bird.width >= x && bird.x <= x)
-            return true;
-        // upper tube collision
-        // сделать проверку самостоятельно тут
+        }
 
+        if (bird.y <= gapY - gapHeight / 2 &&
+                bird.x + bird.width >= x && bird.x <= x + width) {
+            return true;
+        }
         return false;
     }
 
-
     public void setPointReceived() {
         isPointReceived = true;
-
     }
 
     public boolean needAddPoint(Bird bird) {
         if (bird.x > x + width && !isPointReceived) {
             return true;
         }
-
-        return false;
-
-    }
-
-    /*
-    public boolean isHit(Bird bird) {
-        if (bird.x + bird.width == x && bird.x == x + width) {
-            return true;
-        }
         return false;
     }
-    */
+
     void dispose() {
         textureDownTube.dispose();
         textureUpperTube.dispose();
     }
-
-
 }
